@@ -13,7 +13,7 @@ class UseCase4PalindromeCheckerApp {
             }
             left++;
             right--;
-        }
+
         return true;
     }
 
