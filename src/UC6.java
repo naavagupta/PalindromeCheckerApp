@@ -1,39 +1,35 @@
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
-public class UC5 {
+public class UC6 {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        // remove special characters and convert to lowercase
         String processed = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
 
+        Queue<Character> queue = new LinkedList<>();
         Stack<Character> stack = new Stack<>();
 
-        // push all characters into stack
         for (int i = 0; i < processed.length(); i++) {
-            stack.push(processed.charAt(i));
+            char ch = processed.charAt(i);
+            queue.add(ch);
+            stack.push(ch);
         }
 
         boolean isPalindrome = true;
 
-        // compare with popped characters
-        for (int i = 0; i < processed.length(); i++) {
-            if (processed.charAt(i) != stack.pop()) {
+        while (!queue.isEmpty()) {
+            if (!queue.remove().equals(stack.pop())) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // output result
-        if (isPalindrome) {
+        if (isPalindrome)
             System.out.println("The string is a palindrome.");
-        } else {
+        else
             System.out.println("The string is not a palindrome.");
-        }
 
         sc.close();
     }
