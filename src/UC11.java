@@ -1,23 +1,25 @@
 import java.util.Scanner;
+import java.util.Stack;
 
 class PalindromeChecker {
     public boolean checkPalindrome(String input) {
         String normalized = input.replaceAll("\\s+", "").toLowerCase();
-        int left = 0;
-        int right = normalized.length() - 1;
+        Stack<Character> stack = new Stack<>();
 
-        while (left < right) {
-            if (normalized.charAt(left) != normalized.charAt(right)) {
+        for (int i = 0; i < normalized.length(); i++) {
+            stack.push(normalized.charAt(i));
+        }
+
+        for (int i = 0; i < normalized.length(); i++) {
+            if (normalized.charAt(i) != stack.pop()) {
                 return false;
             }
-            left++;
-            right--;
         }
         return true;
     }
 }
 
-public class UseCase10PalindromeCheckerApp {
+public class UC11 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
